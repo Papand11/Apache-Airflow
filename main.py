@@ -1,9 +1,11 @@
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import liquibase.Liquibase;
 import liquibase.database.Database;
 import liquibase.database.jvm.HibernateDatabase;
 import liquibase.resource.ClassLoaderResourceAccessor;
+import java.sql.Connection;
 import java.util.logging.Logger;
 
 public class MigrationManager {
@@ -12,13 +14,7 @@ public class MigrationManager {
 
     public static void main(String[] args) {
         try {
-            sessionFactory = new Configuration().configure().buildSessionFactory();
-            runMigrations();
-        } catch (Exception e) {
-            logger.severe("Database migration failed: " + e.getMessage());
-            throw new RuntimeException("Migration error", e);
-        }
-    }
+            sessionFactory = new Configuration().configure("
 
     public static void runMigrations() {
         try {
